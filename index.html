@@ -528,49 +528,205 @@ body{
 .transition-btn:focus-visible{ outline: 3px solid var(--gold-deep); outline-offset: 2px; }
 
 /* ============ FINAL SECTION ============ */
-#section-final .photo-frame{ max-width: 460px; }
-.final-title{
-  font-family: var(--font-display);
-  font-size: clamp(2.1rem, 6.5vw, 4rem);
-  font-weight: 800;
-  color: var(--gold-deep);
-  line-height: 1.3;
-  margin-top: 26px;
-  opacity: 0;
-  animation: fadeInUp 1.3s ease forwards 0.6s;
-  text-shadow: 0 4px 20px rgba(201,165,103,0.3);
-}
-.final-subtitle{
-  margin-top: 18px;
-  font-size: clamp(1.1rem, 3vw, 1.5rem);
-  color: var(--ink-soft);
-  opacity: 0;
-  animation: fadeInUp 1.3s ease forwards 0.9s;
-}
-.moon-emoji{ display: inline-block; animation: floatMoon 4s ease-in-out infinite; }
-@keyframes floatMoon{
-  0%,100%{ transform: translateY(0) rotate(0deg); }
-  50%{ transform: translateY(-8px) rotate(8deg); }
+#section-final{
+    background:#000;
+    overflow:hidden;
 }
 
-/* progress dots (sections nav indicator) */
-#progress-dots{
-  position: fixed;
-  top: 26px; left: 50%;
-  transform: translateX(-50%);
-  display: flex; gap: 8px;
-  z-index: 40;
+.final-bg{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:1;
 }
-#progress-dots span{
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: rgba(156,122,61,0.25);
-  transition: all 0.4s ease;
+
+.final-photo{
+
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    opacity:0;
+
+    transform:scale(1.18);
+
+    animation:
+    photoReveal 3s forwards;
 }
-#progress-dots span.active{
-  background: var(--gold-deep);
-  width: 22px;
-  border-radius: 5px;
+
+@keyframes photoReveal{
+
+    to{
+
+        opacity:1;
+        transform:scale(1);
+
+    }
+
+}
+
+.final-text{
+
+    position:relative;
+
+    z-index:3;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    color:white;
+
+    text-align:center;
+
+}
+
+.line,
+.you,
+.moon,
+.birthday,
+.divider{
+
+    opacity:0;
+
+}
+
+.line{
+
+    font-size:2rem;
+
+    margin:12px;
+
+    animation:fadeUp .8s forwards;
+
+}
+
+#l1{
+
+    animation-delay:2.5s;
+
+}
+
+#l2{
+
+    animation-delay:3.5s;
+
+}
+
+#l3{
+
+    animation-delay:4.5s;
+
+}
+
+.you{
+
+    font-size:5rem;
+
+    font-weight:900;
+
+    color:#F8D777;
+
+    margin:30px 0;
+
+    text-shadow:
+
+    0 0 15px #F8D777,
+
+    0 0 40px gold,
+
+    0 0 70px gold;
+
+    animation:youReveal 1.2s forwards;
+
+    animation-delay:5.8s;
+
+}
+
+@keyframes youReveal{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.5);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+.divider{
+
+    width:220px;
+
+    height:1px;
+
+    background:linear-gradient(to right,transparent,gold,transparent);
+
+    margin:30px 0;
+
+    animation:fadeUp .8s forwards;
+
+    animation-delay:7s;
+
+}
+
+.moon{
+
+    font-size:2rem;
+
+    animation:fadeUp .8s forwards;
+
+    animation-delay:8s;
+
+}
+
+.birthday{
+
+    font-size:2.3rem;
+
+    margin-top:35px;
+
+    font-weight:bold;
+
+    animation:fadeUp .8s forwards;
+
+    animation-delay:9s;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
 }
 
 /* ============ MUSIC TOGGLE ============ */
@@ -795,21 +951,36 @@ body{
 
 <!-- ============ FINAL SECTION ============ -->
 <section class="section" id="section-final" data-index="8">
-  <div class="section-bg-texture"></div>
-  <div class="eyebrow">المحطة الأخيرة</div>
-  <div class="photo-frame">
-    <img src="images/photo34.jpg" alt="ذكرى أخيرة" loading="lazy">
-  </div>
-  <h2 class="final-title">It was, still and will always be <span class="highlight">you</span></h2>
-  <p class="final-subtitle">Happy Birhtday To my Moon <span class="moon-emoji">🎂🌙</span></p>
-</section>
 
-<!-- Memory card overlay -->
-<div class="memory-card-overlay" id="cardOverlay">
-  <div class="memory-card">
-    <div class="memory-card-inner" id="cardInner"></div>
-  </div>
-</div>
+    <div class="final-bg"></div>
+
+    <img id="finalPhoto"
+         src="images/photo34.jpg"
+         class="final-photo">
+
+    <div class="final-text">
+
+        <div class="line" id="l1">It was,</div>
+
+        <div class="line" id="l2">still,</div>
+
+        <div class="line" id="l3">and will always be</div>
+
+        <div class="you" id="you">YOU</div>
+
+        <div class="divider" id="divider"></div>
+
+        <div class="moon" id="moon">
+            To my Moon 🌙
+        </div>
+
+        <div class="birthday" id="birthday">
+            Happy Birthday 🎂
+        </div>
+
+    </div>
+
+</section>
 
 <div class="success-burst" id="successBurst"></div>
 
@@ -998,6 +1169,9 @@ function showSection(index){
       el.style.animation = 'none';
       requestAnimationFrame(()=>{ el.style.animation = ''; });
     });
+    if(index === 8){
+    setTimeout(playFinalAnimation,100);
+}
     window.scrollTo({top:0, behavior:'smooth'});
     updateProgressDots(index);
   }
@@ -1216,6 +1390,22 @@ document.getElementById('cardOverlay').addEventListener('click', function(e){
    ==================================================================== */
 initParticles();
 initProgressDots();
+
+  function playFinalAnimation(){
+
+    const final = document.getElementById("section-final");
+
+    final.querySelectorAll("*").forEach(el=>{
+
+        el.style.animation = "none";
+
+        el.offsetHeight;
+
+        el.style.animation = "";
+
+    });
+
+}
 </script>
 
 </body>
